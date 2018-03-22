@@ -1,6 +1,6 @@
 .catalog:
   name: Kubernetes
-  version: v1.9.2-rancher1-deviceplugins-rshared-old
+  version: v1.9.2-rancher1-deviceplugins-rshared
   description: Rancher Kubernetes service
   minimum_rancher_version: v1.6.15-rc1
   questions:
