@@ -1,5 +1,5 @@
 
-{{- $k8sImage:="rancher/k8s:v1.9.2-rancher1-1" }}
+{{- $k8sImage:="rancher/k8s:v1.9.3-rancher1-1" }}
 {{- $etcdImage:="rancher/etcd:v2.3.7-13" }}
 {{- $kubectldImage:="rancher/kubectld:v0.8.6" }}
 {{- $etcHostUpdaterImage:="rancher/etc-host-updater:v0.0.3" }}
@@ -60,7 +60,7 @@ kubelet:
         - /run:/run:rprivate
         - /var/run:/var/run:rprivate
         - /sys:/sys:ro,rprivate
-        - /var/lib/docker:/var/lib/docker:rshared
+        - /var/lib/docker:/var/lib/docker:rprivate
         - /var/lib/kubelet:/var/lib/kubelet:shared
         - /var/log/containers:/var/log/containers:rprivate
         - /var/log/pods:/var/log/pods:rprivate
@@ -126,7 +126,7 @@ kubelet-unschedulable:
         - /run:/run:rprivate
         - /var/run:/var/run:rprivate
         - /sys:/sys:ro,rprivate
-        - /var/lib/docker:/var/lib/docker:rshared
+        - /var/lib/docker:/var/lib/docker:rprivate
         - /var/lib/kubelet:/var/lib/kubelet:shared
         - /var/log/containers:/var/log/containers:rprivate
         - /var/log/pods:/var/log/pods:rprivate
@@ -197,6 +197,7 @@ kubernetes:
         io.rancher.sidekicks: kube-hostname-updater
         io.rancher.websocket.proxy.port: "6443"
         io.rancher.websocket.proxy.scheme: "https"
+        io.rancher.k8s.service.cluster.ip.range: ${SERVICE_CLUSTER_CIDR}
     command:
         - kube-apiserver
         - --storage-backend=etcd2
